@@ -2,7 +2,7 @@ import React from 'react'
 
 const tryon = () => {
   return (
-    <div>tryon</div>
+    <div>TRY-ON</div>
   )
 }
 
