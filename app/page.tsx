@@ -4,7 +4,8 @@ export default function Home() {
   return (
     <div>
 
-      hi riddhi
+      python progress tracker
+      
     </div>
   );
 }
