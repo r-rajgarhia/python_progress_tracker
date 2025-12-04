@@ -1,1072 +1,548 @@
+'use client';
 
-
-// import React, { useState, useEffect } from 'react';
-// import { CheckCircle2, Circle, Calendar, Target, Clock, Award } from 'lucide-react';
-
-// const StudyTracker = () => {
-//   const [checkedItems, setCheckedItems] = useState({});
-//   const [currentDay, setCurrentDay] = useState(1);
-
-//   const studyPlan = {
-//     week1: {
-//       title: "Week 1: Python Foundations + OOP",
-//       days: [
-//         {
-//           day: 1,
-//           title: "Python Basics Revision - Part 1",
-//           hours: "3-4 hrs",
-//           topics: [
-//             { id: "d1-1", task: "Watch Programming with Mosh - Python Full Course (Variables to Data Types)", link: "https://www.youtube.com/watch?v=_uQrJ0TkZlc" },
-//             { id: "d1-2", task: "Code along: Practice lists, tuples, dictionaries" },
-//             { id: "d1-3", task: "Build Contact Book Console App - Basic structure" },
-//             { id: "d1-4", task: "Solve 3 easy problems on HackerRank/LeetCode" }
-//           ]
-//         },
-//         {
-//           day: 2,
-//           title: "Python Basics Revision - Part 2",
-//           hours: "3-4 hrs",
-//           topics: [
-//             { id: "d2-1", task: "Watch Programming with Mosh - Functions & Comprehensions section" },
-//             { id: "d2-2", task: "Practice list/dict comprehensions (write 5 examples)" },
-//             { id: "d2-3", task: "Complete Contact Book App (add, search, delete features)" },
-//             { id: "d2-4", task: "Create notes document with key concepts" }
-//           ]
-//         },
-//         {
-//           day: 3,
-//           title: "OOP Deep Dive - Part 1",
-//           hours: "4 hrs",
-//           topics: [
-//             { id: "d3-1", task: "Watch Tech With Tim - Python OOP Tutorial (Complete)", link: "https://www.youtube.com/watch?v=JeznW_7DlB0" },
-//             { id: "d3-2", task: "Code along: Create basic classes with attributes and methods" },
-//             { id: "d3-3", task: "Practice: Write 3 classes (Car, Person, BankAccount)" },
-//             { id: "d3-4", task: "Take detailed OOP notes" }
-//           ]
-//         },
-//         {
-//           day: 4,
-//           title: "OOP Deep Dive - Part 2",
-//           hours: "4 hrs",
-//           topics: [
-//             { id: "d4-1", task: "Watch Programming with Mosh - Python OOP Tutorial", link: "https://www.youtube.com/watch?v=Ej_02ICOIgs" },
-//             { id: "d4-2", task: "Build Library Management System (Book, Member, Library classes)" },
-//             { id: "d4-3", task: "Implement inheritance and polymorphism" },
-//             { id: "d4-4", task: "Implement __str__, __repr__, __add__ magic methods" }
-//           ]
-//         },
-//         {
-//           day: 5,
-//           title: "File Handling",
-//           hours: "3-4 hrs",
-//           topics: [
-//             { id: "d5-1", task: "Watch Corey Schafer - File Objects", link: "https://www.youtube.com/watch?v=Uh2ebFW8OYM" },
-//             { id: "d5-2", task: "Watch Corey Schafer - CSV Module", link: "https://www.youtube.com/watch?v=q5uM4VKywbA" },
-//             { id: "d5-3", task: "Watch Tech With Tim - JSON in Python", link: "https://www.youtube.com/watch?v=9N6a-VLBa2I" },
-//             { id: "d5-4", task: "Practice: Read CSV, process data, write to JSON" },
-//             { id: "d5-5", task: "Implement proper exception handling (try-except blocks)" }
-//           ]
-//         },
-//         {
-//           day: 6,
-//           title: "Advanced Python - Decorators & Generators",
-//           hours: "4 hrs",
-//           topics: [
-//             { id: "d6-1", task: "Watch Tech With Tim - Expert Python Tutorial", link: "https://www.youtube.com/watch?v=mclfteWlT2Q" },
-//             { id: "d6-2", task: "Code along: Create @timer decorator" },
-//             { id: "d6-3", task: "Code along: Create @logger decorator" },
-//             { id: "d6-4", task: "Build a file processor using generators" },
-//             { id: "d6-5", task: "Practice: Write custom context manager" }
-//           ]
-//         },
-//         {
-//           day: 7,
-//           title: "Python for Data + API Basics",
-//           hours: "3-4 hrs",
-//           topics: [
-//             { id: "d7-1", task: "Watch Keith Galli - Pandas Tutorial (first 40 mins)", link: "https://www.youtube.com/watch?v=vmEHCJofslg" },
-//             { id: "d7-2", task: "Practice: Load CSV dataset and perform groupby operations" },
-//             { id: "d7-3", task: "Watch Tech With Tim - Flask REST API basics (30 mins)", link: "https://www.youtube.com/watch?v=GMppyAPbLYk" },
-//             { id: "d7-4", task: "Practice: Make API calls using requests library" },
-//             { id: "d7-5", task: "Review Week 1 notes and code" }
-//           ]
-//         }
-//       ]
-//     },
-//     week2: {
-//       title: "Week 2: Generative AI + Interview Prep",
-//       days: [
-//         {
-//           day: 8,
-//           title: "Gen AI Fundamentals - Part 1",
-//           hours: "4 hrs",
-//           topics: [
-//             { id: "d8-1", task: "Watch IBM Technology - Generative AI in 5 Minutes", link: "https://www.youtube.com/watch?v=G2fqAlgmoPo" },
-//             { id: "d8-2", task: "Watch Simplilearn - Gen AI Full Course (first hour)", link: "https://www.youtube.com/watch?v=6F1YKNR_w5I" },
-//             { id: "d8-3", task: "Take notes: What are LLMs, GPT, Gemini basics" },
-//             { id: "d8-4", task: "Research: Gen AI use cases in enterprise" },
-//             { id: "d8-5", task: "Sign up for OpenAI/Gemini API free tier" }
-//           ]
-//         },
-//         {
-//           day: 9,
-//           title: "Gen AI Fundamentals - Part 2",
-//           hours: "4 hrs",
-//           topics: [
-//             { id: "d9-1", task: "Watch Simplilearn - Gen AI Full Course (continue)", link: "https://www.youtube.com/watch?v=6F1YKNR_w5I" },
-//             { id: "d9-2", task: "Learn: Prompt engineering principles" },
-//             { id: "d9-3", task: "Practice: Write 10 different prompts (creative, technical, analytical)" },
-//             { id: "d9-4", task: "Understand: Tokens, temperature, max_tokens parameters" },
-//             { id: "d9-5", task: "Create Gen AI concepts cheat sheet" }
-//           ]
-//         },
-//         {
-//           day: 10,
-//           title: "Hands-on with OpenAI/Gemini APIs",
-//           hours: "4 hrs",
-//           topics: [
-//             { id: "d10-1", task: "Watch Tech With Tim - OpenAI API Tutorial", link: "https://www.youtube.com/watch?v=c-g6epk3fFE" },
-//             { id: "d10-2", task: "Setup: Install openai/google-generativeai library" },
-//             { id: "d10-3", task: "Code: Make first API call successfully" },
-//             { id: "d10-4", task: "PROJECT: Build AI Content Summarizer (input text → summarized output)" },
-//             { id: "d10-5", task: "Add error handling and API key management" }
-//           ]
-//         },
-//         {
-//           day: 11,
-//           title: "Gen AI Project - Chatbot",
-//           hours: "4 hrs",
-//           topics: [
-//             { id: "d11-1", task: "Watch Nicholas Renotte - Build AI Apps tutorial", link: "https://www.youtube.com/watch?v=8lYS9FuC1eM" },
-//             { id: "d11-2", task: "PROJECT: Build AI Customer Support Chatbot" },
-//             { id: "d11-3", task: "Implement conversation context (remember previous messages)" },
-//             { id: "d11-4", task: "Add logging to JSON file" },
-//             { id: "d11-5", task: "Test chatbot with 10 different queries" }
-//           ]
-//         },
-//         {
-//           day: 12,
-//           title: "Advanced Gen AI - RAG & Langchain",
-//           hours: "4 hrs",
-//           topics: [
-//             { id: "d12-1", task: "Watch freeCodeCamp - Gen AI Course (RAG sections)", link: "https://www.youtube.com/watch?v=mEsleV16qdo" },
-//             { id: "d12-2", task: "Learn: What is RAG (Retrieval Augmented Generation)" },
-//             { id: "d12-3", task: "Learn: Vector databases basics" },
-//             { id: "d12-4", task: "PROJECT: Start Document Q&A System / Code Explainer" },
-//             { id: "d12-5", task: "Implement basic document upload and processing" }
-//           ]
-//         },
-//         {
-//           day: 13,
-//           title: "Complete Gen AI Project",
-//           hours: "4 hrs",
-//           topics: [
-//             { id: "d13-1", task: "Complete Document Q&A System project" },
-//             { id: "d13-2", task: "Test project with different documents/code samples" },
-//             { id: "d13-3", task: "Add UI improvements and error handling" },
-//             { id: "d13-4", task: "Document your code with comments" },
-//             { id: "d13-5", task: "Push all 3 Gen AI projects to GitHub" },
-//             { id: "d13-6", task: "Practice explaining your projects out loud" }
-//           ]
-//         },
-//         {
-//           day: 14,
-//           title: "Final Revision & Mock Interview",
-//           hours: "4 hrs",
-//           topics: [
-//             { id: "d14-1", task: "Watch freeCodeCamp - Python Interview Questions", link: "https://www.youtube.com/watch?v=DEwgZNC-KyE" },
-//             { id: "d14-2", task: "Watch Simplilearn - Gen AI Interview Questions", link: "https://www.youtube.com/watch?v=J_fZ-U8J5No" },
-//             { id: "d14-3", task: "Review all notes from 13 days" },
-//             { id: "d14-4", task: "Create quick reference cheat sheet" },
-//             { id: "d14-5", task: "MOCK INTERVIEW: Record yourself answering 10 questions" },
-//             { id: "d14-6", task: "Practice: Explain each project in 2 minutes" },
-//             { id: "d14-7", task: "Solve 5 medium Python problems on LeetCode" }
-//           ]
-//         }
-//       ]
-//     }
-//   };
-
-//   const projects = [
-//     { id: "p1", name: "Contact Book Console App", status: false },
-//     { id: "p2", name: "Library Management System (OOP)", status: false },
-//     { id: "p3", name: "File Processor with Decorators", status: false },
-//     { id: "p4", name: "AI Content Summarizer", status: false },
-//     { id: "p5", name: "AI Customer Support Chatbot", status: false },
-//     { id: "p6", name: "Document Q&A System / Code Explainer", status: false }
-//   ];
-
-//   const [projectStatus, setProjectStatus] = useState(
-//     projects.reduce((acc, p) => ({ ...acc, [p.id]: false }), {})
-//   );
-
-//   useEffect(() => {
-//     const saved = localStorage.getItem('studyProgress');
-//     if (saved) {
-//       const data = JSON.parse(saved);
-//       setCheckedItems(data.checked || {});
-//       setProjectStatus(data.projects || projectStatus);
-//       setCurrentDay(data.currentDay || 1);
-//     }
-//   }, []);
-
-//   useEffect(() => {
-//     localStorage.setItem('studyProgress', JSON.stringify({
-//       checked: checkedItems,
-//       projects: projectStatus,
-//       currentDay
-//     }));
-//   }, [checkedItems, projectStatus, currentDay]);
-
-//   const toggleItem = (id:any) => {
-//     setCheckedItems(prev => ({ ...prev, [id]: !prev[id] }));
-//   };
-
-//   const toggleProject = (id:any) => {
-//     setProjectStatus(prev => ({ ...prev, [id]: !prev[id] }));
-//   };
-
-//   const calculateProgress = (week) => {
-//     const allItems = week.days.flatMap(d => d.topics.map(t => t.id));
-//     const completed = allItems.filter(id => checkedItems[id]).length;
-//     return Math.round((completed / allItems.length) * 100);
-//   };
-
-//   const resetProgress = () => {
-//     if (confirm('Are you sure you want to reset all progress?')) {
-//       setCheckedItems({});
-//       setProjectStatus(projects.reduce((acc, p) => ({ ...acc, [p.id]: false }), {}));
-//       setCurrentDay(1);
-//     }
-//   };
-
-//   const allWeeks = [studyPlan.week1, studyPlan.week2];
-//   const allDays = [...studyPlan.week1.days, ...studyPlan.week2.days];
-
-//   return (
-//     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-//       <div className="max-w-6xl mx-auto">
-//         {/* Header */}
-//         <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-//           <div className="flex items-center justify-between mb-4">
-//             <div>
-//               <h1 className="text-3xl font-bold text-gray-800 mb-2">
-//                 Python + Gen AI Study Tracker
-//               </h1>
-//               <p className="text-gray-600">HCL Technologies Interview Preparation</p>
-//             </div>
-//             <Target className="text-indigo-600" size={48} />
-//           </div>
-
-//           {/* Progress Overview */}
-//           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-//             <div className="bg-indigo-50 rounded-lg p-4">
-//               <div className="flex items-center justify-between mb-2">
-//                 <span className="text-sm font-semibold text-indigo-700">Week 1 Progress</span>
-//                 <Calendar className="text-indigo-600" size={20} />
-//               </div>
-//               <div className="text-2xl font-bold text-indigo-900">
-//                 {calculateProgress(studyPlan.week1)}%
-//               </div>
-//               <div className="w-full bg-indigo-200 rounded-full h-2 mt-2">
-//                 <div
-//                   className="bg-indigo-600 h-2 rounded-full transition-all"
-//                   style={{ width: `${calculateProgress(studyPlan.week1)}%` }}
-//                 />
-//               </div>
-//             </div>
-
-//             <div className="bg-purple-50 rounded-lg p-4">
-//               <div className="flex items-center justify-between mb-2">
-//                 <span className="text-sm font-semibold text-purple-700">Week 2 Progress</span>
-//                 <Clock className="text-purple-600" size={20} />
-//               </div>
-//               <div className="text-2xl font-bold text-purple-900">
-//                 {calculateProgress(studyPlan.week2)}%
-//               </div>
-//               <div className="w-full bg-purple-200 rounded-full h-2 mt-2">
-//                 <div
-//                   className="bg-purple-600 h-2 rounded-full transition-all"
-//                   style={{ width: `${calculateProgress(studyPlan.week2)}%` }}
-//                 />
-//               </div>
-//             </div>
-
-//             <div className="bg-green-50 rounded-lg p-4">
-//               <div className="flex items-center justify-between mb-2">
-//                 <span className="text-sm font-semibold text-green-700">Projects Done</span>
-//                 <Award className="text-green-600" size={20} />
-//               </div>
-//               <div className="text-2xl font-bold text-green-900">
-//                 {Object.values(projectStatus).filter(Boolean).length} / 6
-//               </div>
-//               <div className="w-full bg-green-200 rounded-full h-2 mt-2">
-//                 <div
-//                   className="bg-green-600 h-2 rounded-full transition-all"
-//                   style={{ width: `${(Object.values(projectStatus).filter(Boolean).length / 6) * 100}%` }}
-//                 />
-//               </div>
-//             </div>
-//           </div>
-
-//           {/* Day Selector */}
-//           <div className="mt-6">
-//             <label className="block text-sm font-semibold text-gray-700 mb-2">
-//               Current Day:
-//             </label>
-//             <select
-//               value={currentDay}
-//               onChange={(e) => setCurrentDay(Number(e.target.value))}
-//               className="w-full md:w-64 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-//             >
-//               {allDays.map((day, idx) => (
-//                 <option key={idx} value={day.day}>
-//                   Day {day.day} - {day.title}
-//                 </option>
-//               ))}
-//             </select>
-//           </div>
-
-//           <button
-//             onClick={resetProgress}
-//             className="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
-//           >
-//             Reset All Progress
-//           </button>
-//         </div>
-
-//         {/* Week 1 */}
-//         <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-//           <h2 className="text-2xl font-bold text-indigo-800 mb-4 flex items-center">
-//             <Calendar className="mr-2" />
-//             {studyPlan.week1.title}
-//           </h2>
-
-//           {studyPlan.week1.days.map((day) => (
-//             <div
-//               key={day.day}
-//               className={`mb-6 p-4 rounded-lg ${
-//                 currentDay === day.day
-//                   ? 'bg-indigo-50 border-2 border-indigo-400'
-//                   : 'bg-gray-50'
-//               }`}
-//             >
-//               <div className="flex items-center justify-between mb-3">
-//                 <h3 className="text-lg font-bold text-gray-800">
-//                   Day {day.day}: {day.title}
-//                 </h3>
-//                 <span className="text-sm text-gray-600 bg-white px-3 py-1 rounded-full">
-//                   {day.hours}
-//                 </span>
-//               </div>
-
-//               <div className="space-y-2">
-//                 {day.topics.map((topic) => (
-//                   <div
-//                     key={topic.id}
-//                     className="flex items-start space-x-3 p-2 hover:bg-white rounded transition"
-//                   >
-//                     <button
-//                       onClick={() => toggleItem(topic.id)}
-//                       className="mt-0.5 flex-shrink-0"
-//                     >
-//                       {checkedItems[topic.id] ? (
-//                         <CheckCircle2 className="text-green-600" size={20} />
-//                       ) : (
-//                         <Circle className="text-gray-400" size={20} />
-//                       )}
-//                     </button>
-//                     <span
-//                       className={`text-sm ${
-//                         checkedItems[topic.id]
-//                           ? 'line-through text-gray-500'
-//                           : 'text-gray-700'
-//                       }`}
-//                     >
-//                       {topic.task}
-//                     </span>
-//                   </div>
-//                 ))}
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-
-//         {/* Week 2 */}
-//         <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-//           <h2 className="text-2xl font-bold text-purple-800 mb-4 flex items-center">
-//             <Clock className="mr-2" />
-//             {studyPlan.week2.title}
-//           </h2>
-
-//           {studyPlan.week2.days.map((day) => (
-//             <div
-//               key={day.day}
-//               className={`mb-6 p-4 rounded-lg ${
-//                 currentDay === day.day
-//                   ? 'bg-purple-50 border-2 border-purple-400'
-//                   : 'bg-gray-50'
-//               }`}
-//             >
-//               <div className="flex items-center justify-between mb-3">
-//                 <h3 className="text-lg font-bold text-gray-800">
-//                   Day {day.day}: {day.title}
-//                 </h3>
-//                 <span className="text-sm text-gray-600 bg-white px-3 py-1 rounded-full">
-//                   {day.hours}
-//                 </span>
-//               </div>
-
-//               <div className="space-y-2">
-//                 {day.topics.map((topic) => (
-//                   <div
-//                     key={topic.id}
-//                     className="flex items-start space-x-3 p-2 hover:bg-white rounded transition"
-//                   >
-//                     <button
-//                       onClick={() => toggleItem(topic.id)}
-//                       className="mt-0.5 flex-shrink-0"
-//                     >
-//                       {checkedItems[topic.id] ? (
-//                         <CheckCircle2 className="text-green-600" size={20} />
-//                       ) : (
-//                         <Circle className="text-gray-400" size={20} />
-//                       )}
-//                     </button>
-//                     <span
-//                       className={`text-sm ${
-//                         checkedItems[topic.id]
-//                           ? 'line-through text-gray-500'
-//                           : 'text-gray-700'
-//                       }`}
-//                     >
-//                       {topic.task}
-//                     </span>
-//                   </div>
-//                 ))}
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-
-//         {/* Projects Checklist */}
-//         <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-//           <h2 className="text-2xl font-bold text-green-800 mb-4 flex items-center">
-//             <Award className="mr-2" />
-//             Must-Complete Projects
-//           </h2>
-
-//           <div className="space-y-3">
-//             {projects.map((project) => (
-//               <div
-//                 key={project.id}
-//                 className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition"
-//               >
-//                 <button
-//                   onClick={() => toggleProject(project.id)}
-//                   className="flex-shrink-0"
-//                 >
-//                   {projectStatus[project.id] ? (
-//                     <CheckCircle2 className="text-green-600" size={24} />
-//                   ) : (
-//                     <Circle className="text-gray-400" size={24} />
-//                   )}
-//                 </button>
-//                 <span
-//                   className={`text-base font-medium ${
-//                     projectStatus[project.id]
-//                       ? 'line-through text-gray-500'
-//                       : 'text-gray-700'
-//                   }`}
-//                 >
-//                   {project.name}
-//                 </span>
-//               </div>
-//             ))}
-//           </div>
-//         </div>
-
-//         {/* Tips */}
-//         <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg shadow-lg p-6">
-//           <h3 className="text-xl font-bold text-orange-800 mb-3">💡 Pro Tips</h3>
-//           <ul className="space-y-2 text-sm text-gray-700">
-//             <li>✅ Code along with EVERY tutorial - don't just watch</li>
-//             <li>✅ Push all projects to GitHub for interview discussion</li>
-//             <li>✅ Practice explaining concepts out loud</li>
-//             <li>✅ Take breaks every 90 minutes to avoid burnout</li>
-//             <li>✅ Review previous day's notes before starting new topics</li>
-//             <li>✅ Join Python/Gen AI Discord communities for quick help</li>
-//           </ul>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default StudyTracker;
-"use client"
 import React, { useState, useEffect } from 'react';
-import { CheckCircle2, Circle, Calendar, Target, Clock, Award } from 'lucide-react';
+import { Check, Clock, Trophy, BookOpen, Code, Brain, Calendar } from 'lucide-react';
 
-interface Topic {
-  id: string;
-  task: string;
-  link?: string;
+// Type definitions
+interface Task {
+  text: string;
+  link: string | null;
 }
 
 interface Day {
-  day: number;
+  day: string;
   title: string;
   hours: string;
-  topics: Topic[];
+  icon: any;
+  color: string;
+  tasks: Task[];
 }
 
 interface Week {
-  title: string;
+  week: string;
   days: Day[];
-}
-
-interface StudyPlan {
-  week1: Week;
-  week2: Week;
-}
-
-interface Project {
-  id: string;
-  name: string;
-  status: boolean;
 }
 
 interface CheckedItems {
   [key: string]: boolean;
 }
 
-interface ProjectStatus {
-  [key: string]: boolean;
+interface StorageResult {
+  value: string;
 }
 
-interface SavedData {
-  checked?: CheckedItems;
-  projects?: ProjectStatus;
-  currentDay?: number;
+// Extend Window interface to include storage
+declare global {
+  interface Window {
+    storage: {
+      get: (key: string) => Promise<StorageResult | null>;
+      set: (key: string, value: string) => Promise<void>;
+      delete: (key: string) => Promise<void>;
+    };
+  }
 }
 
-const StudyTracker: React.FC = () => {
+const StudyPlanTracker = () => {
   const [checkedItems, setCheckedItems] = useState<CheckedItems>({});
-  const [currentDay, setCurrentDay] = useState<number>(1);
+  const [completedDays, setCompletedDays] = useState<CheckedItems>({});
 
-  const studyPlan: StudyPlan = {
-    week1: {
-      title: "Week 1: Python Foundations + OOP",
+  // Load saved progress from storage
+  useEffect(() => {
+    const loadProgress = async () => {
+      try {
+        const savedChecked = await window.storage.get('study-checked-items');
+        const savedDays = await window.storage.get('study-completed-days');
+        
+        if (savedChecked && savedChecked.value) {
+          setCheckedItems(JSON.parse(savedChecked.value));
+        }
+        if (savedDays && savedDays.value) {
+          setCompletedDays(JSON.parse(savedDays.value));
+        }
+      } catch (error) {
+        console.log('No saved progress found, starting fresh');
+      }
+    };
+    loadProgress();
+  }, []);
+
+  // Save progress to storage
+  const saveProgress = async (newChecked: CheckedItems, newDays: CheckedItems) => {
+    try {
+      await window.storage.set('study-checked-items', JSON.stringify(newChecked));
+      await window.storage.set('study-completed-days', JSON.stringify(newDays));
+    } catch (error) {
+      console.error('Failed to save progress:', error);
+    }
+  };
+
+  const studyPlan: Week[] = [
+    {
+      week: "Week 1: Python Foundations + Core Libraries",
       days: [
         {
-          day: 1,
-          title: "Python Basics Revision - Part 1",
-          hours: "3-4 hrs",
-          topics: [
-            { id: "d1-1", task: "Watch Programming with Mosh - Python Full Course (Variables to Data Types)", link: "https://www.youtube.com/watch?v=_uQrJ0TkZlc" },
-            { id: "d1-2", task: "Code along: Practice lists, tuples, dictionaries" },
-            { id: "d1-3", task: "Build Contact Book Console App - Basic structure" },
-            { id: "d1-4", task: "Solve 3 easy problems on HackerRank/LeetCode" }
+          day: "Days 1-2",
+          title: "Python Basics Speed Revision",
+          hours: "3 hrs/day",
+          icon: BookOpen,
+          color: "bg-blue-500",
+          tasks: [
+            { text: "Watch Programming with Mosh - Python Tutorial (1.5x speed)", link: "https://www.youtube.com/watch?v=_uQrJ0TkZlc" },
+            { text: "Review: Data types, functions, comprehensions", link: null },
+            { text: "Build Contact Book Console App (add, search, delete)", link: null },
+            { text: "Test: Can you explain list comprehensions vs loops?", link: null }
           ]
         },
         {
-          day: 2,
-          title: "Python Basics Revision - Part 2",
-          hours: "3-4 hrs",
-          topics: [
-            { id: "d2-1", task: "Watch Programming with Mosh - Functions & Comprehensions section" },
-            { id: "d2-2", task: "Practice list/dict comprehensions (write 5 examples)" },
-            { id: "d2-3", task: "Complete Contact Book App (add, search, delete features)" },
-            { id: "d2-4", task: "Create notes document with key concepts" }
+          day: "Days 3-4",
+          title: "Object-Oriented Programming",
+          hours: "3 hrs/day",
+          icon: Code,
+          color: "bg-green-500",
+          tasks: [
+            { text: "Watch Tech With Tim - Python OOP Tutorial (1.5 hrs)", link: "https://www.youtube.com/watch?v=JeznW_7DlB0" },
+            { text: "Learn: Classes, inheritance, polymorphism, encapsulation", link: null },
+            { text: "Build Library Management System (Book, Member, Library classes)", link: null },
+            { text: "Implement __str__, __repr__, __add__ magic methods", link: null },
+            { text: "Test: Can you explain inheritance with real example?", link: null }
           ]
         },
         {
-          day: 3,
-          title: "OOP Deep Dive - Part 1",
-          hours: "4 hrs",
-          topics: [
-            { id: "d3-1", task: "Watch Tech With Tim - Python OOP Tutorial (Complete)", link: "https://www.youtube.com/watch?v=JeznW_7DlB0" },
-            { id: "d3-2", task: "Code along: Create basic classes with attributes and methods" },
-            { id: "d3-3", task: "Practice: Write 3 classes (Car, Person, BankAccount)" },
-            { id: "d3-4", task: "Take detailed OOP notes" }
+          day: "Days 5-6",
+          title: "NumPy & Pandas Deep Dive",
+          hours: "3-4 hrs/day",
+          icon: Brain,
+          color: "bg-purple-500",
+          tasks: [
+            { text: "Day 5: Watch freeCodeCamp - NumPy Tutorial (1 hr)", link: "https://www.youtube.com/watch?v=QUT1VHiLmmI" },
+            { text: "Practice: Array operations, reshaping, math computations", link: null },
+            { text: "Day 6: Watch Keith Galli - Pandas Tutorial (1 hr)", link: "https://www.youtube.com/watch?v=vmEHCJofslg" },
+            { text: "Watch Corey Schafer - Pandas Series (first 3-4 videos)", link: "https://www.youtube.com/playlist?list=PL-osiE80TeTsWmV9i9c58mdDCSskIFdDS" },
+            { text: "Practice: Load CSV, clean data, groupby, merge datasets", link: null },
+            { text: "Test: Can you explain DataFrame vs NumPy array?", link: null }
           ]
         },
         {
-          day: 4,
-          title: "OOP Deep Dive - Part 2",
-          hours: "4 hrs",
-          topics: [
-            { id: "d4-1", task: "Watch Programming with Mosh - Python OOP Tutorial", link: "https://www.youtube.com/watch?v=Ej_02ICOIgs" },
-            { id: "d4-2", task: "Build Library Management System (Book, Member, Library classes)" },
-            { id: "d4-3", task: "Implement inheritance and polymorphism" },
-            { id: "d4-4", task: "Implement __str__, __repr__, __add__ magic methods" }
-          ]
-        },
-        {
-          day: 5,
-          title: "File Handling",
-          hours: "3-4 hrs",
-          topics: [
-            { id: "d5-1", task: "Watch Corey Schafer - File Objects", link: "https://www.youtube.com/watch?v=Uh2ebFW8OYM" },
-            { id: "d5-2", task: "Watch Corey Schafer - CSV Module", link: "https://www.youtube.com/watch?v=q5uM4VKywbA" },
-            { id: "d5-3", task: "Watch Tech With Tim - JSON in Python", link: "https://www.youtube.com/watch?v=9N6a-VLBa2I" },
-            { id: "d5-4", task: "Practice: Read CSV, process data, write to JSON" },
-            { id: "d5-5", task: "Implement proper exception handling (try-except blocks)" }
-          ]
-        },
-        {
-          day: 6,
-          title: "Advanced Python - Decorators & Generators",
-          hours: "4 hrs",
-          topics: [
-            { id: "d6-1", task: "Watch Tech With Tim - Expert Python Tutorial", link: "https://www.youtube.com/watch?v=mclfteWlT2Q" },
-            { id: "d6-2", task: "Code along: Create @timer decorator" },
-            { id: "d6-3", task: "Code along: Create @logger decorator" },
-            { id: "d6-4", task: "Build a file processor using generators" },
-            { id: "d6-5", task: "Practice: Write custom context manager" }
-          ]
-        },
-        {
-          day: 7,
-          title: "Python for Data + API Basics",
-          hours: "3-4 hrs",
-          topics: [
-            { id: "d7-1", task: "Watch Keith Galli - Pandas Tutorial (first 40 mins)", link: "https://www.youtube.com/watch?v=vmEHCJofslg" },
-            { id: "d7-2", task: "Practice: Load CSV dataset and perform groupby operations" },
-            { id: "d7-3", task: "Watch Tech With Tim - Flask REST API basics (30 mins)", link: "https://www.youtube.com/watch?v=GMppyAPbLYk" },
-            { id: "d7-4", task: "Practice: Make API calls using requests library" },
-            { id: "d7-5", task: "Review Week 1 notes and code" }
+          day: "Day 7",
+          title: "Matplotlib & Data Visualization",
+          hours: "3-4 hrs/day",
+          icon: Calendar,
+          color: "bg-orange-500",
+          tasks: [
+            { text: "Watch Corey Schafer - Matplotlib Series (first 5-6 videos)", link: "https://www.youtube.com/playlist?list=PL-osiE80TeTvipOqomVEeZ1HRrcEvtZB_" },
+            { text: "Create: Line, bar, scatter, and pie charts", link: null },
+            { text: "Customize: Labels, legends, colors, styles", link: null },
+            { text: "Practice: Multi-plot layouts and subplots", link: null },
+            { text: "Test: Can you create a dashboard-style visualization?", link: null }
           ]
         }
       ]
     },
-    week2: {
-      title: "Week 2: Generative AI + Interview Prep",
+    {
+      week: "Week 2: Advanced Python + Libraries + GenAI",
       days: [
         {
-          day: 8,
-          title: "Gen AI Fundamentals - Part 1",
-          hours: "4 hrs",
-          topics: [
-            { id: "d8-1", task: "Watch IBM Technology - Generative AI in 5 Minutes", link: "https://www.youtube.com/watch?v=G2fqAlgmoPo" },
-            { id: "d8-2", task: "Watch Simplilearn - Gen AI Full Course (first hour)", link: "https://www.youtube.com/watch?v=6F1YKNR_w5I" },
-            { id: "d8-3", task: "Take notes: What are LLMs, GPT, Gemini basics" },
-            { id: "d8-4", task: "Research: Gen AI use cases in enterprise" },
-            { id: "d8-5", task: "Sign up for OpenAI/Gemini API free tier" }
+          day: "Day 8",
+          title: "Advanced Python Concepts",
+          hours: "3 hrs",
+          icon: Code,
+          color: "bg-red-500",
+          tasks: [
+            { text: "Watch Tech With Tim - Expert Python Tutorial (2.5 hrs)", link: "https://www.youtube.com/watch?v=mclfteWlT2Q" },
+            { text: "Focus: Decorators, Generators, Context Managers", link: null },
+            { text: "Create @timer and @logger decorators from scratch", link: null },
+            { text: "Build generator for file processing", link: null },
+            { text: "Test: Explain when to use generator vs list", link: null }
           ]
         },
         {
-          day: 9,
-          title: "Gen AI Fundamentals - Part 2",
-          hours: "4 hrs",
-          topics: [
-            { id: "d9-1", task: "Watch Simplilearn - Gen AI Full Course (continue)", link: "https://www.youtube.com/watch?v=6F1YKNR_w5I" },
-            { id: "d9-2", task: "Learn: Prompt engineering principles" },
-            { id: "d9-3", task: "Practice: Write 10 different prompts (creative, technical, analytical)" },
-            { id: "d9-4", task: "Understand: Tokens, temperature, max_tokens parameters" },
-            { id: "d9-5", task: "Create Gen AI concepts cheat sheet" }
+          day: "Day 9",
+          title: "File Handling",
+          hours: "3 hrs",
+          icon: BookOpen,
+          color: "bg-teal-500",
+          tasks: [
+            { text: "Watch Corey Schafer - File Objects", link: "https://www.youtube.com/watch?v=Uh2ebFW8OYM" },
+            { text: "Watch Corey Schafer - CSV Module", link: "https://www.youtube.com/watch?v=q5uM4VKywbA" },
+            { text: "Watch Corey Schafer - JSON Module", link: "https://www.youtube.com/watch?v=9N6a-VLBa2I" },
+            { text: "Create CSV/JSON data processor", link: null },
+            { text: "Test: Can you handle file exceptions properly?", link: null }
           ]
         },
         {
-          day: 10,
-          title: "Hands-on with OpenAI/Gemini APIs",
-          hours: "4 hrs",
-          topics: [
-            { id: "d10-1", task: "Watch Tech With Tim - OpenAI API Tutorial", link: "https://www.youtube.com/watch?v=c-g6epk3fFE" },
-            { id: "d10-2", task: "Setup: Install openai/google-generativeai library" },
-            { id: "d10-3", task: "Code: Make first API call successfully" },
-            { id: "d10-4", task: "PROJECT: Build AI Content Summarizer (input text → summarized output)" },
-            { id: "d10-5", task: "Add error handling and API key management" }
+          day: "Day 10",
+          title: "REST APIs",
+          hours: "3 hrs",
+          icon: Code,
+          color: "bg-cyan-500",
+          tasks: [
+            { text: "Watch Tech With Tim - REST API Tutorial (1 hr)", link: "https://www.youtube.com/watch?v=GMppyAPbLYk" },
+            { text: "Practice: Make API calls using requests library", link: null },
+            { text: "Handle API responses, errors, authentication", link: null },
+            { text: "Build a simple weather API fetcher", link: null },
+            { text: "Test: Can you explain REST API methods?", link: null }
           ]
         },
         {
-          day: 11,
-          title: "Gen AI Project - Chatbot",
-          hours: "4 hrs",
-          topics: [
-            { id: "d11-1", task: "Watch Nicholas Renotte - Build AI Apps tutorial", link: "https://www.youtube.com/watch?v=8lYS9FuC1eM" },
-            { id: "d11-2", task: "PROJECT: Build AI Customer Support Chatbot" },
-            { id: "d11-3", task: "Implement conversation context (remember previous messages)" },
-            { id: "d11-4", task: "Add logging to JSON file" },
-            { id: "d11-5", task: "Test chatbot with 10 different queries" }
+          day: "Day 11",
+          title: "Generative AI Concepts",
+          hours: "2.5-3 hrs",
+          icon: Brain,
+          color: "bg-pink-500",
+          tasks: [
+            { text: "Watch IBM Technology - GenAI in 5 Minutes", link: "https://www.youtube.com/watch?v=G2fqAlgmoPo" },
+            { text: "Watch Simplilearn - GenAI Course (first 1 hour)", link: "https://www.youtube.com/watch?v=6F1YKNR_w5I" },
+            { text: "Learn: LLMs, GPT, Gemini, prompt engineering", link: null },
+            { text: "Understand: Tokens, temperature, use cases", link: null },
+            { text: "Test: Can you explain how LLMs work?", link: null }
           ]
         },
         {
-          day: 12,
-          title: "Advanced Gen AI - RAG & Langchain",
-          hours: "4 hrs",
-          topics: [
-            { id: "d12-1", task: "Watch freeCodeCamp - Gen AI Course (RAG sections)", link: "https://www.youtube.com/watch?v=mEsleV16qdo" },
-            { id: "d12-2", task: "Learn: What is RAG (Retrieval Augmented Generation)" },
-            { id: "d12-3", task: "Learn: Vector databases basics" },
-            { id: "d12-4", task: "PROJECT: Start Document Q&A System / Code Explainer" },
-            { id: "d12-5", task: "Implement basic document upload and processing" }
+          day: "Day 12",
+          title: "GenAI Hands-on with APIs",
+          hours: "3 hrs",
+          icon: Brain,
+          color: "bg-fuchsia-500",
+          tasks: [
+            { text: "Watch Tech With Tim - OpenAI API Tutorial", link: "https://www.youtube.com/watch?v=c-g6epk3fFE" },
+            { text: "Set up OpenAI/Gemini API keys", link: null },
+            { text: "Build AI Text Summarizer project", link: null },
+            { text: "Add error handling and API key management", link: null },
+            { text: "Test different prompts and parameters", link: null }
           ]
         },
         {
-          day: 13,
-          title: "Complete Gen AI Project",
-          hours: "4 hrs",
-          topics: [
-            { id: "d13-1", task: "Complete Document Q&A System project" },
-            { id: "d13-2", task: "Test project with different documents/code samples" },
-            { id: "d13-3", task: "Add UI improvements and error handling" },
-            { id: "d13-4", task: "Document your code with comments" },
-            { id: "d13-5", task: "Push all 3 Gen AI projects to GitHub" },
-            { id: "d13-6", task: "Practice explaining your projects out loud" }
+          day: "Day 13",
+          title: "Integration Project",
+          hours: "3-4 hrs",
+          icon: Trophy,
+          color: "bg-yellow-500",
+          tasks: [
+            { text: "Build Data Analysis Report Generator", link: null },
+            { text: "Load CSV with Pandas and analyze data", link: null },
+            { text: "Create visualizations with Matplotlib", link: null },
+            { text: "Generate AI summary using OpenAI API", link: null },
+            { text: "Export complete report", link: null },
+            { text: "This is your STAR project for interview!", link: null }
           ]
         },
         {
-          day: 14,
-          title: "Final Revision & Mock Interview",
-          hours: "4 hrs",
-          topics: [
-            { id: "d14-1", task: "Watch freeCodeCamp - Python Interview Questions", link: "https://www.youtube.com/watch?v=DEwgZNC-KyE" },
-            { id: "d14-2", task: "Watch Simplilearn - Gen AI Interview Questions", link: "https://www.youtube.com/watch?v=J_fZ-U8J5No" },
-            { id: "d14-3", task: "Review all notes from 13 days" },
-            { id: "d14-4", task: "Create quick reference cheat sheet" },
-            { id: "d14-5", task: "MOCK INTERVIEW: Record yourself answering 10 questions" },
-            { id: "d14-6", task: "Practice: Explain each project in 2 minutes" },
-            { id: "d14-7", task: "Solve 5 medium Python problems on LeetCode" }
+          day: "Day 14",
+          title: "Interview Prep & Mock Practice",
+          hours: "3-4 hrs",
+          icon: Check,
+          color: "bg-indigo-500",
+          tasks: [
+            { text: "Morning: Review all projects and notes", link: null },
+            { text: "Practice explaining OOP, decorators, pandas", link: null },
+            { text: "Afternoon: Mock interview practice", link: null },
+            { text: "Record yourself answering Python questions", link: null },
+            { text: "Record yourself answering GenAI questions", link: null },
+            { text: "Review all 5 projects - be ready to demo/explain", link: null },
+            { text: "Sleep well - you're ready! 💪", link: null }
           ]
         }
       ]
     }
-  };
-
-  const projects: Project[] = [
-    { id: "p1", name: "Contact Book Console App", status: false },
-    { id: "p2", name: "Library Management System (OOP)", status: false },
-    { id: "p3", name: "File Processor with Decorators", status: false },
-    { id: "p4", name: "AI Content Summarizer", status: false },
-    { id: "p5", name: "AI Customer Support Chatbot", status: false },
-    { id: "p6", name: "Document Q&A System / Code Explainer", status: false }
   ];
 
-  const initialProjectStatus: ProjectStatus = projects.reduce(
-    (acc, p) => ({ ...acc, [p.id]: false }),
-    {}
-  );
+  const projects = [
+    { name: "Contact Book Console App", tech: "Python Basics" },
+    { name: "Library Management System", tech: "OOP" },
+    { name: "Data Analysis with Pandas/NumPy", tech: "Libraries" },
+    { name: "AI Text Summarizer", tech: "GenAI" },
+    { name: "Data Analysis Report Generator", tech: "Integration ⭐" }
+  ];
 
-  const [projectStatus, setProjectStatus] = useState<ProjectStatus>(initialProjectStatus);
+  const interviewChecklist = [
+    "Can explain OOP with real examples",
+    "Know NumPy array operations",
+    "Master Pandas (groupby, merge, clean data)",
+    "Create Matplotlib visualizations",
+    "Understand decorators and generators",
+    "Know file handling and APIs",
+    "Explain what GenAI and LLMs are",
+    "Have prompt engineering basics",
+    "Can discuss GenAI project in detail",
+    "Know enterprise GenAI use cases"
+  ];
 
-  useEffect(() => {
-    const saved = localStorage.getItem('studyProgress');
-    if (saved) {
-      try {
-        const data: SavedData = JSON.parse(saved);
-        setCheckedItems(data.checked || {});
-        setProjectStatus(data.projects || initialProjectStatus);
-        setCurrentDay(data.currentDay || 1);
-      } catch (error) {
-        console.error('Error loading saved progress:', error);
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    try {
-      localStorage.setItem('studyProgress', JSON.stringify({
-        checked: checkedItems,
-        projects: projectStatus,
-        currentDay
-      }));
-    } catch (error) {
-      console.error('Error saving progress:', error);
-    }
-  }, [checkedItems, projectStatus, currentDay]);
-
-  const toggleItem = (id: string): void => {
-    setCheckedItems(prev => ({ ...prev, [id]: !prev[id] }));
+  const handleTaskCheck = (weekIdx: number, dayIdx: number, taskIdx: number) => {
+    const key = `${weekIdx}-${dayIdx}-${taskIdx}`;
+    const newChecked = { ...checkedItems, [key]: !checkedItems[key] };
+    setCheckedItems(newChecked);
+    saveProgress(newChecked, completedDays);
   };
 
-  const toggleProject = (id: string): void => {
-    setProjectStatus(prev => ({ ...prev, [id]: !prev[id] }));
+  const handleDayComplete = (weekIdx: number, dayIdx: number) => {
+    const key = `${weekIdx}-${dayIdx}`;
+    const newDays = { ...completedDays, [key]: !completedDays[key] };
+    setCompletedDays(newDays);
+    saveProgress(checkedItems, newDays);
   };
 
-  const calculateProgress = (week: Week): number => {
-    const allItems = week.days.flatMap(d => d.topics.map(t => t.id));
-    const completed = allItems.filter(id => checkedItems[id]).length;
-    return Math.round((completed / allItems.length) * 100);
+  const handleProjectCheck = (idx: number) => {
+    const key = `project-${idx}`;
+    const newChecked = { ...checkedItems, [key]: !checkedItems[key] };
+    setCheckedItems(newChecked);
+    saveProgress(newChecked, completedDays);
   };
 
-  const resetProgress = (): void => {
+  const handleChecklistCheck = (idx: number) => {
+    const key = `checklist-${idx}`;
+    const newChecked = { ...checkedItems, [key]: !checkedItems[key] };
+    setCheckedItems(newChecked);
+    saveProgress(newChecked, completedDays);
+  };
+
+  const resetProgress = async () => {
     if (window.confirm('Are you sure you want to reset all progress?')) {
       setCheckedItems({});
-      setProjectStatus(initialProjectStatus);
-      setCurrentDay(1);
+      setCompletedDays({});
+      try {
+        await window.storage.delete('study-checked-items');
+        await window.storage.delete('study-completed-days');
+      } catch (error) {
+        console.error('Failed to reset progress:', error);
+      }
     }
   };
 
-  const allDays: Day[] = [...studyPlan.week1.days, ...studyPlan.week2.days];
+  const totalDays = 14; // Fixed to 14 days
+  const completedDaysCount = Object.values(completedDays).filter(Boolean).length;
+  const progressPercentage = Math.round((completedDaysCount / totalDays) * 100);
+
+  // Calculate week-wise progress
+  const getWeekProgress = (weekIdx: number) => {
+    const week = studyPlan[weekIdx];
+    const weekDays = 7; // Each week has 7 days
+    const completedInWeek = week.days.filter((_, dayIdx) => 
+      completedDays[`${weekIdx}-${dayIdx}`]
+    ).length;
+    return {
+      completed: completedInWeek,
+      total: weekDays,
+      percentage: Math.round((completedInWeek / weekDays) * 100)
+    };
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 p-4">
+      <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-800 mb-2">
-                Python + Gen AI Study Tracker
-              </h1>
-              <p className="text-gray-600">HCL Technologies Interview Preparation</p>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">
+            🎯 HCL Python + GenAI Study Tracker
+          </h1>
+          <p className="text-gray-600 mb-4">2-Week Interview Preparation Plan</p>
+          
+          {/* Progress Bar */}
+          <div className="mb-4">
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-sm font-semibold text-gray-700">Overall Progress</span>
+              <span className="text-sm font-bold text-indigo-600">{progressPercentage}%</span>
             </div>
-            <Target className="text-indigo-600" size={48} />
+            <div className="w-full bg-gray-200 rounded-full h-4">
+              <div 
+                className="bg-linear-to-r from-indigo-500 to-purple-600 h-4 rounded-full transition-all duration-500"
+                style={{ width: `${progressPercentage}%` }}
+              ></div>
+            </div>
+            <p className="text-sm text-gray-600 mt-2">
+              {completedDaysCount} of {totalDays} days completed
+            </p>
           </div>
 
-          {/* Progress Overview */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-            <div className="bg-indigo-50 rounded-lg p-4">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-semibold text-indigo-700">Week 1 Progress</span>
-                <Calendar className="text-indigo-600" size={20} />
-              </div>
-              <div className="text-2xl font-bold text-indigo-900">
-                {calculateProgress(studyPlan.week1)}%
-              </div>
-              <div className="w-full bg-indigo-200 rounded-full h-2 mt-2">
-                <div
-                  className="bg-indigo-600 h-2 rounded-full transition-all"
-                  style={{ width: `${calculateProgress(studyPlan.week1)}%` }}
-                />
-              </div>
-            </div>
-
-            <div className="bg-purple-50 rounded-lg p-4">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-semibold text-purple-700">Week 2 Progress</span>
-                <Clock className="text-purple-600" size={20} />
-              </div>
-              <div className="text-2xl font-bold text-purple-900">
-                {calculateProgress(studyPlan.week2)}%
-              </div>
-              <div className="w-full bg-purple-200 rounded-full h-2 mt-2">
-                <div
-                  className="bg-purple-600 h-2 rounded-full transition-all"
-                  style={{ width: `${calculateProgress(studyPlan.week2)}%` }}
-                />
-              </div>
-            </div>
-
-            <div className="bg-green-50 rounded-lg p-4">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-semibold text-green-700">Projects Done</span>
-                <Award className="text-green-600" size={20} />
-              </div>
-              <div className="text-2xl font-bold text-green-900">
-                {Object.values(projectStatus).filter(Boolean).length} / 6
-              </div>
-              <div className="w-full bg-green-200 rounded-full h-2 mt-2">
-                <div
-                  className="bg-green-600 h-2 rounded-full transition-all"
-                  style={{ width: `${(Object.values(projectStatus).filter(Boolean).length / 6) * 100}%` }}
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Day Selector */}
-          <div className="mt-6">
-            <label htmlFor="day-selector" className="block text-sm font-semibold text-gray-700 mb-2">
-              Current Day:
-            </label>
-            <select
-              id="day-selector"
-              value={currentDay}
-              onChange={(e) => setCurrentDay(Number(e.target.value))}
-              className="w-full md:w-64 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-            >
-              {allDays.map((day) => (
-                <option key={day.day} value={day.day}>
-                  Day {day.day} - {day.title}
-                </option>
-              ))}
-            </select>
+          {/* Weekly Progress Bars */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            {studyPlan.map((week, idx) => {
+              const weekProgress = getWeekProgress(idx);
+              return (
+                <div key={idx} className="bg-gray-50 rounded-lg p-4">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-sm font-semibold text-gray-700">Week {idx + 1}</span>
+                    <span className="text-sm font-bold text-indigo-600">{weekProgress.percentage}%</span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-3">
+                    <div 
+                      className={`h-3 rounded-full transition-all duration-500 ${
+                        idx === 0 ? 'bg-linear-to-r from-blue-500 to-green-500' : 'bg-linear-to-r from-purple-500 to-pink-500'
+                      }`}
+                      style={{ width: `${weekProgress.percentage}%` }}
+                    ></div>
+                  </div>
+                  <p className="text-xs text-gray-600 mt-1">
+                    {weekProgress.completed} of {weekProgress.total} days
+                  </p>
+                </div>
+              );
+            })}
           </div>
 
           <button
             onClick={resetProgress}
-            className="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
-            type="button"
+            className="text-sm text-red-600 hover:text-red-800 underline"
           >
             Reset All Progress
           </button>
         </div>
 
-        {/* Week 1 */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-          <h2 className="text-2xl font-bold text-indigo-800 mb-4 flex items-center">
-            <Calendar className="mr-2" />
-            {studyPlan.week1.title}
-          </h2>
-
-          {studyPlan.week1.days.map((day) => (
-            <div
-              key={day.day}
-              className={`mb-6 p-4 rounded-lg ${
-                currentDay === day.day
-                  ? 'bg-indigo-50 border-2 border-indigo-400'
-                  : 'bg-gray-50'
-              }`}
-            >
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="text-lg font-bold text-gray-800">
-                  Day {day.day}: {day.title}
-                </h3>
-                <span className="text-sm text-gray-600 bg-white px-3 py-1 rounded-full">
-                  {day.hours}
-                </span>
-              </div>
-
-              <div className="space-y-2">
-                {day.topics.map((topic) => (
-                  <div
-                    key={topic.id}
-                    className="flex items-start space-x-3 p-2 hover:bg-white rounded transition"
-                  >
+        {/* Study Plan */}
+        {studyPlan.map((week, weekIdx) => (
+          <div key={weekIdx} className="mb-8">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4 bg-white rounded-lg p-4 shadow">
+              {week.week}
+            </h2>
+            
+            {week.days.map((day, dayIdx) => {
+              const Icon = day.icon;
+              const dayKey = `${weekIdx}-${dayIdx}`;
+              const isDayComplete = completedDays[dayKey] || false;
+              
+              return (
+                <div key={dayIdx} className="bg-white rounded-lg shadow-md p-6 mb-4">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className={`${day.color} p-3 rounded-lg`}>
+                        <Icon className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-800">{day.day}</h3>
+                        <p className="text-gray-600 font-semibold">{day.title}</p>
+                        <p className="text-sm text-gray-500 flex items-center gap-1">
+                          <Clock className="w-4 h-4" /> {day.hours}
+                        </p>
+                      </div>
+                    </div>
                     <button
-                      onClick={() => toggleItem(topic.id)}
-                      className="mt-0.5 flex-shrink-0"
-                      type="button"
-                      aria-label={`Toggle ${topic.task}`}
-                    >
-                      {checkedItems[topic.id] ? (
-                        <CheckCircle2 className="text-green-600" size={20} />
-                      ) : (
-                        <Circle className="text-gray-400" size={20} />
-                      )}
-                    </button>
-                    <span
-                      className={`text-sm ${
-                        checkedItems[topic.id]
-                          ? 'line-through text-gray-500'
-                          : 'text-gray-700'
+                      onClick={() => handleDayComplete(weekIdx, dayIdx)}
+                      className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                        isDayComplete
+                          ? 'bg-green-500 text-white'
+                          : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
                       }`}
                     >
-                      {topic.task}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Week 2 */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-          <h2 className="text-2xl font-bold text-purple-800 mb-4 flex items-center">
-            <Clock className="mr-2" />
-            {studyPlan.week2.title}
-          </h2>
-
-          {studyPlan.week2.days.map((day) => (
-            <div
-              key={day.day}
-              className={`mb-6 p-4 rounded-lg ${
-                currentDay === day.day
-                  ? 'bg-purple-50 border-2 border-purple-400'
-                  : 'bg-gray-50'
-              }`}
-            >
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="text-lg font-bold text-gray-800">
-                  Day {day.day}: {day.title}
-                </h3>
-                <span className="text-sm text-gray-600 bg-white px-3 py-1 rounded-full">
-                  {day.hours}
-                </span>
-              </div>
-
-              <div className="space-y-2">
-                {day.topics.map((topic) => (
-                  <div
-                    key={topic.id}
-                    className="flex items-start space-x-3 p-2 hover:bg-white rounded transition"
-                  >
-                    <button
-                      onClick={() => toggleItem(topic.id)}
-                      className="mt-0.5 flex-shrink-0"
-                      type="button"
-                      aria-label={`Toggle ${topic.task}`}
-                    >
-                      {checkedItems[topic.id] ? (
-                        <CheckCircle2 className="text-green-600" size={20} />
-                      ) : (
-                        <Circle className="text-gray-400" size={20} />
-                      )}
+                      {isDayComplete ? '✓ Completed' : 'Mark Complete'}
                     </button>
-                    <span
-                      className={`text-sm ${
-                        checkedItems[topic.id]
-                          ? 'line-through text-gray-500'
-                          : 'text-gray-700'
-                      }`}
-                    >
-                      {topic.task}
-                    </span>
                   </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
 
-        {/* Projects Checklist */}
+                  <div className="space-y-2">
+                    {day.tasks.map((task, taskIdx) => {
+                      const taskKey = `${weekIdx}-${dayIdx}-${taskIdx}`;
+                      const isChecked = checkedItems[taskKey] || false;
+                      
+                      return (
+                        <label key={taskIdx} className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={() => handleTaskCheck(weekIdx, dayIdx, taskIdx)}
+                            className="mt-1 w-5 h-5 text-indigo-600 rounded-full focus:ring-indigo-500 appearance-none border-2 border-gray-300 checked:bg-indigo-600 checked:border-indigo-600 cursor-pointer relative"
+                            style={{
+                              backgroundImage: isChecked ? 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'white\'%3E%3Cpath d=\'M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z\'/%3E%3C/svg%3E")' : 'none',
+                              backgroundSize: '70%',
+                              backgroundPosition: 'center',
+                              backgroundRepeat: 'no-repeat'
+                            }}
+                          />
+                          <span className={`flex-1 ${isChecked ? 'line-through text-gray-500' : 'text-gray-700'}`}>
+                            {task.link ? (
+                              <a href={task.link} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-800 hover:underline">
+                                {task.text}
+                              </a>
+                            ) : (
+                              task.text
+                            )}
+                          </span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ))}
+
+        {/* Projects List */}
         <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-          <h2 className="text-2xl font-bold text-green-800 mb-4 flex items-center">
-            <Award className="mr-2" />
-            Must-Complete Projects
+          <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <Trophy className="w-6 h-6 text-yellow-500" />
+            5 Must-Have Projects
           </h2>
-
           <div className="space-y-3">
-            {projects.map((project) => (
-              <div
-                key={project.id}
-                className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition"
-              >
-                <button
-                  onClick={() => toggleProject(project.id)}
-                  className="flex-shrink-0"
-                  type="button"
-                  aria-label={`Toggle ${project.name}`}
-                >
-                  {projectStatus[project.id] ? (
-                    <CheckCircle2 className="text-green-600" size={24} />
-                  ) : (
-                    <Circle className="text-gray-400" size={24} />
-                  )}
-                </button>
-                <span
-                  className={`text-base font-medium ${
-                    projectStatus[project.id]
-                      ? 'line-through text-gray-500'
-                      : 'text-gray-700'
-                  }`}
-                >
-                  {project.name}
-                </span>
-              </div>
-            ))}
+            {projects.map((project, idx) => {
+              const isChecked = checkedItems[`project-${idx}`] || false;
+              return (
+                <label key={idx} className="flex items-center gap-3 p-4 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+                  <input
+                    type="checkbox"
+                    checked={isChecked}
+                    onChange={() => handleProjectCheck(idx)}
+                    className="w-5 h-5 text-green-600 rounded-full focus:ring-green-500 appearance-none border-2 border-gray-300 checked:bg-green-600 checked:border-green-600 cursor-pointer"
+                    style={{
+                      backgroundImage: isChecked ? 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'white\'%3E%3Cpath d=\'M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z\'/%3E%3C/svg%3E")' : 'none',
+                      backgroundSize: '70%',
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat'
+                    }}
+                  />
+                  <div className="flex-1">
+                    <span className={`font-semibold ${isChecked ? 'line-through text-gray-500' : 'text-gray-800'}`}>
+                      {project.name}
+                    </span>
+                    <span className="ml-2 text-sm text-indigo-600 font-medium">
+                      [{project.tech}]
+                    </span>
+                  </div>
+                </label>
+              );
+            })}
           </div>
         </div>
 
-        {/* Tips */}
-        <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg shadow-lg p-6">
-          <h3 className="text-xl font-bold text-orange-800 mb-3">💡 Pro Tips</h3>
-          <ul className="space-y-2 text-sm text-gray-700">
-            <li>✅ Code along with EVERY tutorial - don&apos;t just watch</li>
-            <li>✅ Push all projects to GitHub for interview discussion</li>
-            <li>✅ Practice explaining concepts out loud</li>
-            <li>✅ Take breaks every 90 minutes to avoid burnout</li>
-            <li>✅ Review previous day&apos;s notes before starting new topics</li>
-            <li>✅ Join Python/Gen AI Discord communities for quick help</li>
-          </ul>
+        {/* Interview Checklist */}
+        <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <Check className="w-6 h-6 text-green-500" />
+            Interview Day Checklist
+          </h2>
+          <div className="space-y-2">
+            {interviewChecklist.map((item, idx) => {
+              const isChecked = checkedItems[`checklist-${idx}`] || false;
+              return (
+                <label key={idx} className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={isChecked}
+                    onChange={() => handleChecklistCheck(idx)}
+                    className="w-5 h-5 text-indigo-600 rounded-full focus:ring-indigo-500 appearance-none border-2 border-gray-300 checked:bg-indigo-600 checked:border-indigo-600 cursor-pointer"
+                    style={{
+                      backgroundImage: isChecked ? 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'white\'%3E%3Cpath d=\'M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z\'/%3E%3C/svg%3E")' : 'none',
+                      backgroundSize: '70%',
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat'
+                    }}
+                  />
+                  <span className={`${isChecked ? 'line-through text-gray-500' : 'text-gray-700'}`}>
+                    {item}
+                  </span>
+                </label>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="bg-linear-to-r from-indigo-600 to-purple-600 rounded-lg shadow-lg p-6 text-white text-center">
+          <h3 className="text-xl font-bold mb-2">🚀 You've Got This!</h3>
+          <p className="text-indigo-100">
+            Stay consistent, build those projects, and nail that HCL interview!
+          </p>
         </div>
       </div>
     </div>
   );
 };
 
-export default StudyTracker;
+export default StudyPlanTracker;
